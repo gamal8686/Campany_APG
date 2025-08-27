@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "25021432919",
+    "project_id": "elhwary-shop",
+    "storage_bucket": "elhwary-shop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25021432919:android:0fc941f9e8c447a09ccf12",
+        "android_client_info": {
+          "package_name": "com.example.elhwar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDojFDaRmR9B1eou3CD85HDs6QwYhsyVvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
