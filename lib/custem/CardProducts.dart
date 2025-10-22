@@ -43,7 +43,8 @@ class CardProducts extends StatelessWidget {
             btnOkOnPress: () async {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => edidhome(docid: id, oldname: name),
+                  builder: (context) =>
+                      edidhome(docid: id, oldname: name, oldNumber: 'nambrr'),
                 ),
               );
             },

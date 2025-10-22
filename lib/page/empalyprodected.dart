@@ -11,16 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class employProducts extends StatefulWidget {
-  const employProducts({super.key});
+class Empalyprodected extends StatefulWidget {
+  const Empalyprodected({super.key});
 
   @override
-  State<employProducts> createState() => _ProductsState();
+  State<Empalyprodected> createState() => _ProductsState();
 }
 
-class _ProductsState extends State<employProducts> {
+class _ProductsState extends State<Empalyprodected> {
+  List<QueryDocumentSnapshot> filteredData = [];
+  String searchQuery = '';
   List<QueryDocumentSnapshot> data = [];
-
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('productes')
@@ -39,7 +40,6 @@ class _ProductsState extends State<employProducts> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // لما يضغط على زر الرجوع الأساسي، يرجع للـ HomPage زي زر الرجوع جوه المشروع
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => HomPage(),
@@ -47,7 +47,7 @@ class _ProductsState extends State<employProducts> {
             reverseTransitionDuration: Duration.zero,
           ),
         );
-        return false; // لمنع السلوك الافتراضي
+        return false; // false لمنع الرجوع الافتراضي
       },
       child: SafeArea(
         child: Scaffold(
@@ -75,12 +75,13 @@ class _ProductsState extends State<employProducts> {
                           ),
                         );
                       },
+
+                      // ← ترجع للصفحة السابقة
                     ),
                   ],
                 ),
               ),
-              // باقي الكود بدون تغيير
-              SizedBox(height: 50),
+              // SizedBox(height: 50),
               Text(
                 'الانتاج التام بالكامل',
                 style: GoogleFonts.cairo(
@@ -91,25 +92,13 @@ class _ProductsState extends State<employProducts> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text(
-                    ' x  :عدد الاصناف',
-                    style: GoogleFonts.cairo(
-                      textStyle: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: kText,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+
               Expanded(
                 child: data.isEmpty
                     ? const Center(
-                        child: CircularProgressIndicator(color: Colors.brown),
+                        child: CircularProgressIndicator(
+                          color: Colors.brown, // تختار اللون اللي يعجبك
+                        ),
                       )
                     : ListView.builder(
                         itemCount: data.length,
@@ -117,8 +106,8 @@ class _ProductsState extends State<employProducts> {
                           return Padding(
                             padding: const EdgeInsets.only(right: 10, left: 10),
                             child: InkWell(
-                              onLongPress: () {},
                               onTap: () {
+                                // خلي الكارت كله يقدر يضغط عليه
                                 Navigator.of(context).push(
                                   PageRouteBuilder(
                                     pageBuilder:
@@ -138,7 +127,7 @@ class _ProductsState extends State<employProducts> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Container(
                                   alignment: Alignment.topCenter,
-                                  height: 200,
+                                  height: 250, // 👈 كانت 190 قللناها
                                   child: Stack(
                                     children: [
                                       Padding(
@@ -166,107 +155,50 @@ class _ProductsState extends State<employProducts> {
                                                 color: Colors.black,
                                                 offset: const Offset(0, 4),
                                                 blurRadius: 8,
-                                                spreadRadius: 1,
                                               ),
                                             ],
                                           ),
                                           child: Stack(
                                             children: [
                                               Positioned(
-                                                top: 20,
-                                                left: 0,
-                                                right: 0,
-                                                child: Container(height: 170),
-                                              ),
-                                              Positioned(
+                                                top: 30,
                                                 left: 10,
-                                                bottom: 0,
+                                                right: 120,
                                                 child: Center(
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.of(
-                                                        context,
-                                                      ).pushReplacement(
-                                                        PageRouteBuilder(
-                                                          pageBuilder:
-                                                              (
-                                                                context,
-                                                                animation,
-                                                                secondaryAnimation,
-                                                              ) => Employdetilsprodect(
-                                                                categoreid:
-                                                                    data[index]
-                                                                        .id,
-                                                              ),
-                                                          transitionDuration:
-                                                              Duration.zero,
-                                                          reverseTransitionDuration:
-                                                              Duration.zero,
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: CircleAvatar(
-                                                      maxRadius: 25,
-                                                      backgroundColor:
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            20,
+                                                          ),
+                                                      color:
                                                           const Color.fromARGB(
                                                             255,
                                                             241,
                                                             236,
                                                             123,
                                                           ),
-                                                      child: Icon(
-                                                        Icons.menu_book,
-                                                        size: 30,
-                                                        color: kbotton,
+                                                      border: Border.all(
+                                                        color: Colors.black,
                                                       ),
                                                     ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 0,
-                                                left: 0,
-                                                right: 180,
-                                                child: Center(
-                                                  child: CircleAvatar(
-                                                    maxRadius: 30,
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                          255,
-                                                          241,
-                                                          236,
-                                                          123,
+                                                    height: 50,
+                                                    width: 180,
+                                                    child: Center(
+                                                      child: Text(
+                                                        data[index]['nambrr'],
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
-                                                    child: Image.asset(
-                                                      'assets/images/download.png',
-                                                      height: 50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 50,
-                                                left: 190,
-                                                right: 10,
-                                                child: SizedBox(
-                                                  child: Center(
-                                                    child: Text(
-                                                      ': Product ',
-                                                      style: const TextStyle(
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
                                                       ),
-                                                      softWrap: true,
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                               Positioned(
-                                                top: 110,
+                                                top: 90,
                                                 left: 120,
                                                 right: 10,
                                                 child: Container(

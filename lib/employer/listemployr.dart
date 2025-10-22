@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elhwar/const/const.dart';
 import 'package:elhwar/employer/addemployer.dart';
 import 'package:elhwar/page/hompage.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,11 @@ class _EmployeesListPageState extends State<EmployeesListPage> {
         return false; // لمنع الرجوع الافتراضي
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFBDBDBD),
+        backgroundColor: kbacegGrond,
         appBar: AppBar(
           title: const Text('قائمة الموظفين'),
           backgroundColor: Colors.grey[800],
-          foregroundColor: Colors.white,
+          foregroundColor: kbotton,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             tooltip: 'رجوع إلى الرئيسية',

@@ -9,8 +9,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class edidhome extends StatefulWidget {
   final String docid;
   final String oldname;
-
-  const edidhome({super.key, required this.docid, required this.oldname});
+  final String oldNumber;
+  const edidhome({
+    super.key,
+    required this.docid,
+    required this.oldname,
+    required this.oldNumber,
+  });
 
   @override
   State<edidhome> createState() => _edidhomeState();
@@ -18,6 +23,7 @@ class edidhome extends StatefulWidget {
 
 class _edidhomeState extends State<edidhome> {
   TextEditingController name = TextEditingController();
+  TextEditingController nambrr = TextEditingController();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   CollectionReference productes = FirebaseFirestore.instance.collection(
     'productes',
@@ -25,7 +31,10 @@ class _edidhomeState extends State<edidhome> {
   editproductes() async {
     if (formkey.currentState!.validate()) {
       try {
-        await productes.doc(widget.docid).update({'name': name.text});
+        await productes.doc(widget.docid).update({
+          'name': name.text,
+          'nambrr': nambrr.text,
+        });
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => Products(),
@@ -43,6 +52,7 @@ class _edidhomeState extends State<edidhome> {
   void initState() {
     super.initState();
     name.text = widget.oldname;
+    nambrr.text = widget.oldNumber;
   }
 
   @override
@@ -101,6 +111,18 @@ class _edidhomeState extends State<edidhome> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'ادخل بيانات المنتج الجديد';
+                  }
+                  return null;
+                },
+                hint: 'Enter',
+                leabol: '',
+              ),
+              const SizedBox(height: 20),
+              custmTextField(
+                controller: nambrr,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'ادخل عدد المنتج الجديد';
                   }
                   return null;
                 },

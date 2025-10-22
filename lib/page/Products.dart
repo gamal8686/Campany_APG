@@ -5,6 +5,7 @@ import 'package:elhwar/const/const.dart';
 import 'package:elhwar/custem/CardProducts.dart';
 import 'package:elhwar/page/detilsProducts.dart';
 import 'package:elhwar/page/hompage.dart';
+import 'package:elhwar/page/sineIn.dart';
 import 'package:elhwar/updaithome.dart/edithom.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,6 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // لما يضغط زر الرجوع على الجهاز، يرجع للـ HomPage
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => HomPage(),
@@ -82,7 +82,7 @@ class _ProductsState extends State<Products> {
                           PageRouteBuilder(
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
-                                    HomPage(),
+                                    sinein(),
                             transitionDuration: Duration.zero,
                             reverseTransitionDuration: Duration.zero,
                           ),
@@ -94,7 +94,7 @@ class _ProductsState extends State<Products> {
                   ],
                 ),
               ),
-              SizedBox(height: 50),
+              // SizedBox(height: 50),
               Text(
                 'الانتاج التام بالكامل',
                 style: GoogleFonts.cairo(
@@ -102,23 +102,6 @@ class _ProductsState extends State<Products> {
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: kText,
-                  ),
-                ),
-              ),
-
-              SizedBox(
-                height: 50,
-
-                child: Center(
-                  child: Text(
-                    ' x  :عدد الاصناف',
-                    style: GoogleFonts.cairo(
-                      textStyle: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: kText,
-                      ),
-                    ),
                   ),
                 ),
               ),
@@ -191,6 +174,7 @@ class _ProductsState extends State<Products> {
                                             ) => edidhome(
                                               docid: data[index].id,
                                               oldname: data[index]['name'],
+                                              oldNumber: data[index]['nambrr'],
                                             ),
                                         transitionDuration: Duration.zero,
                                         reverseTransitionDuration:
@@ -204,15 +188,12 @@ class _ProductsState extends State<Products> {
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Container(
-                                  //color: Colors.black,
                                   alignment: Alignment.topCenter,
                                   height: 250, // 👈 كانت 190 قللناها
                                   child: Stack(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(
-                                          4.0,
-                                        ), // 👈 كانت 8 خليتها 4
+                                        padding: const EdgeInsets.all(4.0),
                                         child: Container(
                                           margin: const EdgeInsets.only(
                                             top: 20,
@@ -239,9 +220,7 @@ class _ProductsState extends State<Products> {
                                                   0,
                                                   4,
                                                 ), // 👈 اتجاه الظل
-                                                blurRadius:
-                                                    8, // 👈 مدى نعومة الظل
-                                                spreadRadius: 1,
+                                                blurRadius: 8,
                                               ),
                                             ],
                                           ),
@@ -315,14 +294,24 @@ class _ProductsState extends State<Products> {
 
                                                 child: Center(
                                                   child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            20,
+                                                          ),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                            255,
+                                                            241,
+                                                            236,
+                                                            123,
+                                                          ),
+                                                      border: Border.all(
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
                                                     height: 50,
                                                     width: 180,
-                                                    color: const Color.fromARGB(
-                                                      255,
-                                                      241,
-                                                      236,
-                                                      123,
-                                                    ),
 
                                                     child: Center(
                                                       child: Text(
@@ -337,29 +326,7 @@ class _ProductsState extends State<Products> {
                                                   ),
                                                 ),
                                               ),
-                                              // Positioned(
-                                              //   top: 50, // 👈 المسافة من فوق
-                                              //   left: 190,
-                                              //   right: 10,
-                                              //   child: SizedBox(
-                                              //     child: Center(
-                                              //       child: Text(
-                                              //         ': Product ',
-                                              //         style: const TextStyle(
-                                              //           fontSize: 25,
-                                              //           fontWeight:
-                                              //               FontWeight.bold,
-                                              //         ),
-                                              //         softWrap:
-                                              //             true, // 👈 يخلي النص يكسر سطر
-                                              //         maxLines:
-                                              //             2, // 👈 أقصى عدد سطور
-                                              //         overflow: TextOverflow
-                                              //             .ellipsis, // 👈 يحط "..." لو زاد
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // ),
+
                                               Positioned(
                                                 top: 90,
                                                 left: 120,
@@ -387,83 +354,6 @@ class _ProductsState extends State<Products> {
                                   ),
                                 ),
                               ),
-
-                              // child: Container(
-                              //   alignment: Alignment.topCenter,
-                              //   height: 120,
-                              //   child: Stack(
-                              //     children: [
-                              //       Padding(
-                              //         padding: const EdgeInsets.all(4.0),
-                              //         child: Container(
-                              //           margin: const EdgeInsets.only(top: 35),
-                              //           height: 90,
-                              //           width: MediaQuery.of(context).size.width,
-                              //           decoration: BoxDecoration(
-                              //             color: kbotton,
-                              //             borderRadius: BorderRadius.circular(10),
-                              //             boxShadow: [
-                              //               BoxShadow(
-                              //                 color: Colors.black,
-                              //                 offset: const Offset(0, 4),
-                              //                 blurRadius: 8,
-                              //                 spreadRadius: 1,
-                              //               ),
-                              //             ],
-                              //           ),
-                              //         ),
-                              //       ),
-                              //       Positioned(
-                              //         top: 0,
-                              //         left: 10,
-                              //         bottom: 20,
-                              //         child: Container(
-                              //           height: 120,
-                              //           width: 110,
-                              //           padding: const EdgeInsets.all(8.0),
-                              //           // child: Image.asset(
-                              //           // 'assets/images/download.png'
-                              //           //,
-                              //           //  fit: BoxFit.contain,
-                              //           // ),
-                              //         ),
-                              //       ),
-                              //       Positioned(
-                              //         top: 50,
-                              //         right: 16,
-                              //         child: Column(
-                              //           crossAxisAlignment:
-                              //               CrossAxisAlignment.end,
-                              //           children: [
-                              //             Text(
-                              //               ':  Product ',
-                              //               style: GoogleFonts.cairo(
-                              //                 textStyle: const TextStyle(
-                              //                   fontSize: 23,
-                              //                   fontWeight: FontWeight.bold,
-                              //                   color: kmontg,
-                              //                 ),
-                              //               ),
-                              //             ),
-                              //             Center(
-                              //               widthFactor: 2,
-                              //               child: Text(
-                              //                 data[index]['name'],
-                              //                 style: GoogleFonts.cairo(
-                              //                   textStyle: const TextStyle(
-                              //                     fontSize: 22,
-                              //                     fontWeight: FontWeight.bold,
-                              //                     color: kText,
-                              //                   ),
-                              //                 ),
-                              //               ),
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
                             ),
                           );
                         },

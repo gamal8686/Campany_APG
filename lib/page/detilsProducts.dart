@@ -78,7 +78,7 @@ class _detilsProductsState extends State<detilsProducts> {
                   ],
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Text(
                 'مكان المنتج ',
                 style: GoogleFonts.cairo(
@@ -90,21 +90,7 @@ class _detilsProductsState extends State<detilsProducts> {
                 ),
               ),
               const SizedBox(height: 10),
-              SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text(
-                    ' x  : عدد البلتات ',
-                    style: GoogleFonts.cairo(
-                      textStyle: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: kText,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              SizedBox(height: 20),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance

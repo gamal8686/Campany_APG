@@ -15,117 +15,115 @@ class sinein extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kbacegGrond,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  SizedBox(height: 100),
-                  Text(
-                    'Sign In',
-                    style: GoogleFonts.cairo(
-                      textStyle: const TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: kText,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  custmTextField(
-                    hint: 'Email',
-                    leabol: 'email',
-                    controller: email,
-                  ),
-                  SizedBox(height: 30),
-                  custmTextField(
-                    controller: bassword,
-                    hint: 'bassword',
-                    leabol: 'bassword',
-                  ),
-                  SizedBox(height: 30),
-                  MaterialButton(
-                    onPressed: () async {
-                      try {
-                        final credential = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                              email: email.text,
-                              password: bassword.text,
-                            );
-
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    MaterialButton(
+                      onPressed: () {
                         Navigator.of(context).pushReplacement(
                           PageRouteBuilder(
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
                                     Products(),
-                            transitionDuration:
-                                Duration.zero, // ⏱️ يلغي وقت الحركة
-                            reverseTransitionDuration:
-                                Duration.zero, // ⏱️ يلغي الرجوع
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
                           ),
                         );
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
-                        }
-                      }
-                    },
-                    color: kbotton,
-                    minWidth: double.infinity,
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text(
-                      ' ادخل',
-                      style: GoogleFonts.cairo(
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: kText,
+                      },
+                      color: kbotton,
+                      minWidth: double.infinity,
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        '  المخزون ',
+                        style: GoogleFonts.cairo(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: kText,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 30),
-
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  HomPage(),
-                          transitionDuration:
-                              Duration.zero, // ⏱️ يلغي وقت الحركة
-                          reverseTransitionDuration:
-                              Duration.zero, // ⏱️ يلغي الرجوع
-                        ),
-                      );
-                    },
-                    color: kbotton,
-                    minWidth: double.infinity,
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text(
-                      'خروج ',
-                      style: GoogleFonts.cairo(
-                        textStyle: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: kText,
+                    const SizedBox(height: 15),
+                    MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    Admen(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        );
+                      },
+                      color: kbotton,
+                      minWidth: double.infinity,
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        'الانتاج اليومى',
+                        style: GoogleFonts.cairo(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: kText,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 15),
+                    MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    HomPage(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        );
+                      },
+                      color: kbotton,
+                      minWidth: double.infinity,
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        side: const BorderSide(color: Colors.black),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.arrow_back, color: Colors.black),
+                          const SizedBox(width: 10),
+                          Text(
+                            'العودة للصفحة الرئيسية',
+                            style: GoogleFonts.cairo(
+                              textStyle: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

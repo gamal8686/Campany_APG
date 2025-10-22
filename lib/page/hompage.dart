@@ -41,13 +41,6 @@ class _HomPageState extends State<HomPage> {
         padding: const EdgeInsets.only(top: 50),
         child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.03,
-                left: screenWidth * 0.15,
-              ),
-              child: Center(child: LogoCampany()),
-            ),
             SizedBox(height: 30),
             Center(
               child: Padding(
@@ -61,7 +54,7 @@ class _HomPageState extends State<HomPage> {
                           PageRouteBuilder(
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
-                                    employProducts(),
+                                    Empalyprodected(),
                             transitionDuration: Duration.zero,
                             reverseTransitionDuration: Duration.zero,
                           ),
@@ -223,14 +216,64 @@ class _HomPageState extends State<HomPage> {
                     const SizedBox(height: 15),
                     MaterialButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    sinein(),
-                            transitionDuration: Duration.zero,
-                            reverseTransitionDuration: Duration.zero,
-                          ),
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            TextEditingController passwordController =
+                                TextEditingController();
+                            return AlertDialog(
+                              title: const Text('أدخل كلمة المرور'),
+                              content: TextField(
+                                controller: passwordController,
+                                obscureText: true, // يخفي الكتابة
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  hintText: 'كلمة المرور',
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(
+                                      context,
+                                    ).pop(); // يقفل الدايلوج
+                                  },
+                                  child: const Text('إلغاء'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    if (passwordController.text == '0000') {
+                                      Navigator.of(context).push(
+                                        PageRouteBuilder(
+                                          pageBuilder:
+                                              (
+                                                context,
+                                                animation,
+                                                secondaryAnimation,
+                                              ) => sinein(),
+                                          transitionDuration: Duration.zero,
+                                          reverseTransitionDuration:
+                                              Duration.zero,
+                                        ),
+                                      );
+                                    } else {
+                                      // رسالة خطأ لو الباسورد غلط
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('كلمة المرور خاطئة!'),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                    // لا تضع Navigator.pop هنا
+                                  },
+                                  child: const Text('دخول'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
                       color: kbotton,
@@ -250,6 +293,7 @@ class _HomPageState extends State<HomPage> {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: 15),
                     MaterialButton(
                       onPressed: () async {
