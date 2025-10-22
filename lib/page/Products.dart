@@ -206,7 +206,7 @@ class _ProductsState extends State<Products> {
                                 child: Container(
                                   //color: Colors.black,
                                   alignment: Alignment.topCenter,
-                                  height: 200, // 👈 كانت 190 قللناها
+                                  height: 250, // 👈 كانت 190 قللناها
                                   child: Stack(
                                     children: [
                                       Padding(
@@ -293,6 +293,8 @@ class _ProductsState extends State<Products> {
                                                             241,
                                                             236,
                                                             123,
+                                                          ).withValues(
+                                                            alpha: 0.3,
                                                           ),
                                                       child: Text(
                                                         '+',
@@ -307,51 +309,59 @@ class _ProductsState extends State<Products> {
                                                 ),
                                               ),
                                               Positioned(
-                                                top: 0, // 👈 المسافة من فوق
-                                                left: 0,
-                                                right: 180,
+                                                top: 30, // 👈 المسافة من فوق
+                                                left: 10,
+                                                right: 120,
 
                                                 child: Center(
-                                                  child: CircleAvatar(
-                                                    maxRadius: 50,
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                          255,
-                                                          241,
-                                                          236,
-                                                          123,
-                                                        ),
-                                                    child: Image.asset(
-                                                      'assets/images/download.png',
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 180,
+                                                    color: const Color.fromARGB(
+                                                      255,
+                                                      241,
+                                                      236,
+                                                      123,
                                                     ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 50, // 👈 المسافة من فوق
-                                                left: 190,
-                                                right: 10,
-                                                child: SizedBox(
-                                                  child: Center(
-                                                    child: Text(
-                                                      ': Product ',
-                                                      style: const TextStyle(
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+
+                                                    child: Center(
+                                                      child: Text(
+                                                        data[index]['nambrr'],
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ), // القيمة الافتراضية لو الحقل مش موجود
                                                       ),
-                                                      softWrap:
-                                                          true, // 👈 يخلي النص يكسر سطر
-                                                      maxLines:
-                                                          2, // 👈 أقصى عدد سطور
-                                                      overflow: TextOverflow
-                                                          .ellipsis, // 👈 يحط "..." لو زاد
                                                     ),
                                                   ),
                                                 ),
                                               ),
+                                              // Positioned(
+                                              //   top: 50, // 👈 المسافة من فوق
+                                              //   left: 190,
+                                              //   right: 10,
+                                              //   child: SizedBox(
+                                              //     child: Center(
+                                              //       child: Text(
+                                              //         ': Product ',
+                                              //         style: const TextStyle(
+                                              //           fontSize: 25,
+                                              //           fontWeight:
+                                              //               FontWeight.bold,
+                                              //         ),
+                                              //         softWrap:
+                                              //             true, // 👈 يخلي النص يكسر سطر
+                                              //         maxLines:
+                                              //             2, // 👈 أقصى عدد سطور
+                                              //         overflow: TextOverflow
+                                              //             .ellipsis, // 👈 يحط "..." لو زاد
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // ),
                                               Positioned(
-                                                top: 110,
+                                                top: 90,
                                                 left: 120,
                                                 right: 10,
                                                 child: Container(

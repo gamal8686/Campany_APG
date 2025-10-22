@@ -14,6 +14,7 @@ class AddHome extends StatefulWidget {
 
 class _AddHomeState extends State<AddHome> {
   final TextEditingController name = TextEditingController();
+  final TextEditingController nambrr = TextEditingController();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final CollectionReference productes = FirebaseFirestore.instance.collection(
     'productes',
@@ -24,6 +25,7 @@ class _AddHomeState extends State<AddHome> {
       try {
         await productes.add({
           'name': name.text,
+          'nambrr': nambrr.text,
           'id': FirebaseAuth.instance.currentUser!.uid,
         });
 
@@ -92,6 +94,17 @@ class _AddHomeState extends State<AddHome> {
                   },
                   hint: 'اسم الصنف',
                   leabol: 'الاسم',
+                ),
+                custmTextField(
+                  controller: nambrr,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'من فضلك أدخل اسم الصنف الجديد';
+                    }
+                    return null;
+                  },
+                  hint: 'اسم الصنف',
+                  leabol: 'عدد البلتات',
                 ),
                 const SizedBox(height: 25),
                 ElevatedButton(
