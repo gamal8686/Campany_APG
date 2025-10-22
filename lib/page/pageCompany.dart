@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:elhwar/custem/LogoCampany.dart';
 import 'package:elhwar/page/hompage.dart';
 import 'package:elhwar/page/sineIn.dart';
@@ -47,7 +48,7 @@ class _CompanyState extends State<Company> {
                 top: screenHeight * 0.08,
                 left: screenWidth * 0.15,
               ),
-              child: const Center(child: LogoCampany()),
+              child: Center(child: ShakeY(child: const LogoCampany())),
             ),
           ],
         ),

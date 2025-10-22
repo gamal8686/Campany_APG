@@ -41,7 +41,7 @@ class _EmployeesListPageState extends State<EmployeesListPage> {
         appBar: AppBar(
           title: const Text('قائمة الموظفين'),
           backgroundColor: Colors.grey[800],
-          foregroundColor: kbotton,
+          foregroundColor: Colors.white,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             tooltip: 'رجوع إلى الرئيسية',

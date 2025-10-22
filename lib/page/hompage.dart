@@ -7,6 +7,7 @@ import 'package:elhwar/employer/listemployr.dart';
 import 'package:elhwar/order/firstorder.dart';
 import 'package:elhwar/order/order.dart';
 import 'package:elhwar/page/Products.dart';
+import 'package:elhwar/page/email.dart';
 import 'package:elhwar/page/empalyprodected.dart';
 import 'package:elhwar/page/pageCompany.dart';
 import 'package:elhwar/page/sineIn.dart';
@@ -216,64 +217,14 @@ class _HomPageState extends State<HomPage> {
                     const SizedBox(height: 15),
                     MaterialButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            TextEditingController passwordController =
-                                TextEditingController();
-                            return AlertDialog(
-                              title: const Text('أدخل كلمة المرور'),
-                              content: TextField(
-                                controller: passwordController,
-                                obscureText: true, // يخفي الكتابة
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  hintText: 'كلمة المرور',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(
-                                      context,
-                                    ).pop(); // يقفل الدايلوج
-                                  },
-                                  child: const Text('إلغاء'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    if (passwordController.text == '0000') {
-                                      Navigator.of(context).push(
-                                        PageRouteBuilder(
-                                          pageBuilder:
-                                              (
-                                                context,
-                                                animation,
-                                                secondaryAnimation,
-                                              ) => sinein(),
-                                          transitionDuration: Duration.zero,
-                                          reverseTransitionDuration:
-                                              Duration.zero,
-                                        ),
-                                      );
-                                    } else {
-                                      // رسالة خطأ لو الباسورد غلط
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        const SnackBar(
-                                          content: Text('كلمة المرور خاطئة!'),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    }
-                                    // لا تضع Navigator.pop هنا
-                                  },
-                                  child: const Text('دخول'),
-                                ),
-                              ],
-                            );
-                          },
+                        Navigator.of(context).pushReplacement(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    EmailLoginPage(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
                         );
                       },
                       color: kbotton,
